@@ -4,9 +4,13 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 WriteMakefile(
     'NAME'		=> 'Acme::Dot',
-    'VERSION_FROM'	=> 'Dot.pm', # finds $VERSION
+    'VERSION_FROM'	=> 'lib/Acme/Dot.pm', # finds $VERSION
     'PREREQ_PM'		=> {}, # e.g., Module::Name => 1.1
-    ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM => 'Dot.pm', # retrieve abstract from module
-       AUTHOR     => 'Simon Cozens <simon@dsl.easynet.co.uk>') : ()),
+    ($] >= 5.005 
+        ? 
+            (AUTHOR     => 'Curtis "Ovid" Poe <1napc-pmetsuilbup@yahoo.com>') 
+        : ()
+    ),
 );
+
+# reverse the name to email me

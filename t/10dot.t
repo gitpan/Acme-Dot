@@ -1,6 +1,12 @@
 package Foo;
 use Test::More 'no_plan';
-use Acme::Dot;
+
+BEGIN {
+    chdir 't' if -d 't';
+    unshift @INC => '../lib';
+    use_ok('Acme::Dot') or die;
+}
+
 sub new { bless {}, shift }
 sub test1 {
     my $obj = shift;
@@ -10,6 +16,7 @@ sub test1 {
 }
 
 package main;
+
 Test::More->import();
 BEGIN { Foo->import(); };
 

@@ -4,7 +4,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '1.0';
+our $VERSION = '1.01';
 
 my ($call_pack, $call_pack2);
 
@@ -42,7 +42,6 @@ CHECK {
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
@@ -65,21 +64,35 @@ Acme::Dot - Call methods with the dot operator
 
 =head1 DESCRIPTION
 
-This module, when imported into a class, allows objects of that class to
-have methods called using the dot operator as in Ruby, Python and other
-OO languages.
+This module, when imported into a class, allows objects of that class to have
+methods called using the dot operator as in Ruby, Python and other OO
+languages.
 
-However, since it doesn't use source filters or any other high magic,
-it only affects the class it was imported into; objects of other classes
-and ordinary scalars can use concatenation as normal.
+However, since it doesn't use source filters or any other high magic, it only
+affects the class it was imported into; objects of other classes and ordinary
+scalars can use concatenation as normal.
 
 =head1 BUGS
 
-Occasionally has problems distinguishing between methods and
-subroutines. But then, don't we all? This will be fixed in the next
-release.
+May cause warnings about useless use of concatenation.  If anyone is really
+worried about this, it may get fixed.
 
-=head1 AUTHOR
+Occasionally has problems distinguishing between methods and subroutines. But
+then, don't we all? This may be fixed in the next release.
+
+=head1 LICENSE
+
+Copyright (c) 2004 by Curtis "Ovid" Poe.  All rights reserved.  This program is
+free software; you may redistribute it and/or modify it under the same terms as
+Perl itself.
+
+=head1 MAINTAINER
+
+Curtis "Ovid" Poe, E<lt>1napc-pmetsuilbup@yahoo.comE<gt>
+
+Reverse the name to email me.
+
+=head1 ORIGINAL AUTHOR
 
 Simon Cozens, C<simon@cpan.org>
 

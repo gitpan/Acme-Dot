@@ -1,6 +1,7 @@
 Changes
-Dot.pm
+lib/Acme/Dot.pm
 Makefile.PL
 MANIFEST
 README
-t/1.t
+t/10dot.t
+META.yml                                 Module meta-data (added by MakeMaker)
