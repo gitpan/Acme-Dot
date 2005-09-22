@@ -1,5 +1,11 @@
 Revision history for Perl extension Acme::Dot.
 
+1.10  2005/09/22
+      Pod and Pod coverage tests.
+      No longer clobber caller's import.
+      Made the code easier to read.
+      Added Build.PL
+
 1.01  Dec 3, 2004
       Maintenance release by Ovid just to let the world know
       that this module is not forgotten.

@@ -1,5 +1,6 @@
 package Foo;
-use Test::More 'no_plan';
+#use Test::More 'no_plan';
+use Test::More tests => 6;
 
 BEGIN {
     chdir 't' if -d 't';

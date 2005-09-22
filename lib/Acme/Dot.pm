@@ -4,40 +4,39 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '1.01';
+our $VERSION = '1.10';
 
-my ($call_pack, $call_pack2);
+my ( $call_pack, $call_pack2 );
 
-sub import { 
-    no strict 'refs';
-    $call_pack = (caller())[0];
-    *{$call_pack."::import"} = sub { $call_pack2 = (caller())[0]; };
-    eval <<EOT
- package $call_pack;
-use overload "." => sub { 
-    my (\$obj, \$stuff) = \@_;
-    \@_ = (\$obj, \@{\$stuff->{data}});
-    goto \&{\$obj->can(\$stuff->{name})};
-}, fallback => 1;
-
-EOT
-    ;
+sub import {
+    $call_pack  = ( caller(0) )[0];
+    $call_pack2 = ( caller(1) )[0];
+    my $code = "package $call_pack;\n" . <<'    END_OF_CODE';
+    use overload "." => sub { 
+            my ( $obj, $stuff ) = @_;
+            @_ = ( $obj, @{ $stuff->{data} } );
+            goto &{ $obj->can( $stuff->{name} ) };
+        },
+        fallback => 1;
+    END_OF_CODE
+    eval $code;
 }
 
 CHECK {
-   # At this point, everything is ready, and $call_pack2 contains
-   # the calling package's calling package.
-   no strict;
-   if ($call_pack2) {
-   eval "
-   package $call_pack2;
-   *AUTOLOAD = sub { 
-        \$AUTOLOAD =~ /.*::(.*)/;
-        return if \$1 eq \"DESTROY\";
-        return { data => \\\@_, name => \$1 }
-   }
-   ";
-   }
+
+    # At this point, everything is ready, and $call_pack2 contains
+    # the calling package's calling package.
+    no strict;
+    if ($call_pack2) {
+        my $code = "package $call_pack2;\n" . <<'        END_OF_CODE';
+        *AUTOLOAD = sub { 
+            $AUTOLOAD =~ /.*::(.*)/;
+            return if $1 eq "DESTROY";
+            return { data => \@_, name => $1 };
+        }
+        END_OF_CODE
+        eval $code;
+    }
 }
 
 1;
